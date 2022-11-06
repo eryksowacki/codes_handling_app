@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('codes');
 });
+
+Route::get('/codes/create', function () {
+    return view('create');
+});
+
+Route::get('/codes/delete', function () {
+    return view('delete');
+});
+
+Route::get('/codes', 'App\Http\Controllers\CodeController@index');
+?>
