@@ -48,14 +48,18 @@
     </header>
 
     <main>
-        <form action="" method="">
-            Podaj liczbę kodów do wygenerowania (1-10): <input type="number" placeholder="Type number" min="1" max="10">
-            <input type="button" value="Generate" id="generateCode">
+
+        <form action="{{ url('/codes/create') }}" method="post">
+            @csrf
+            Podaj liczbę kodów do wygenerowania (1-10): 
+            <input type="number" min="1" max="10" name="codesQuantity"> <br>
+            <input type="submit" value="Generuj">
         </form>
     </main>
 
+    <!-- <script src="{{url('../js/codesGenerate.js')}}" type="text/javascript"></script> -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>            
+    <script src="../js/bootstrap.min.js"></script>     
     </body>
 </html>

@@ -13,17 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('codes');
-});
+//  Route::get('/codes/create', function () {
+//     return view('create');
+// }); 
 
-Route::get('/codes/create', function () {
-    return view('create');
-});
-
-Route::get('/codes/delete', function () {
-    return view('delete');
-});
-
-Route::get('/codes', 'App\Http\Controllers\CodeController@index');
+Route::get('/codes/create', 'App\Http\Controllers\CodeController@create');
+Route::post('/codes/create', 'App\Http\Controllers\CodeController@create');
+Route::get('/codes', 'App\Http\Controllers\CodeController@show');
+Route::get('/codes/delete', 'App\Http\Controllers\CodeController@destroy');
 ?>
