@@ -52,7 +52,7 @@
         <form action="{{ url('/codes/create') }}" method="post">
             @csrf
             Podaj liczbę kodów do wygenerowania (1-10): 
-            <input type="number" min="1" max="10" name="codesQuantity"> <br>
+            <input type="number" min="1" max="10" id="codesQuantity" name="codesQuantity"> <br>
             <input type="submit" value="Generuj">
         </form>
     </main>

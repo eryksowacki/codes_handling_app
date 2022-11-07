@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-light navbar-expand-md">
 
-            <!-- <a class="navbar-brand" href="index.html">Codes Handling App</a>
+            <a class="navbar-brand" href="{{url('/codes')}}">Codes Handling App</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false"
@@ -21,7 +21,7 @@
 
                 <span class="navbar-toggler-icon"></span>
             
-            </button> -->
+            </button>
 
 
             <div class="collapse navbar-collapse" id="mainmenu">
@@ -48,15 +48,6 @@
     </header>
 
     <ul>
-        <!-- @if(!empty($code))
-             <li>Brak kodów w bazie danych.</li>
-        @else
-            @foreach($codes as $code)
-                <li>{{ $code -> id}}</li>
-                <li>{{ $code -> code}}</li>
-                <li>{{ $code -> date}}</li>
-            @endforeach   
-        @endif -->
         @foreach($codes as $code)
             <li>{{ $code -> id}}</li>
             <li>{{ $code -> code}}</li>
@@ -66,8 +57,6 @@
             Brak kodów w bazie danych.
         @endif
     </ul>
-        
-  
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

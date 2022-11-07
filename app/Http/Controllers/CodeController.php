@@ -16,42 +16,56 @@ class CodeController extends Controller
      */
     public function create(Request $request)
     {
-        if(isset($request -> input['codesQuantity']))
+        if($request -> has('codesQuantity'))
         {
-            $codesQuantity = $request -> input['codesQuantity'];
+            $code = new Code();
 
-            for($i = 1; $i < ($codesQuantity + 1); $i++)
+            $code->codesQuantity = $request->codesQuantity;
+
+            for($i = 1; $i < ($code->codesQuantity + 1); $i++)
             {
-                $randomNumber = rand(1000000000, 9999999999);
-                
-                if($randomNumber < 10000000000 || $randomNumber > 9999999999)
+                $tab = array();
+
+                for($j = 0; $j < 10; $j++)
                 {
-                    return "Wylosowano błędną liczbę";
-                }
+                    $randomNumber = rand(0, 9);
+                    $tab[$j] = $randomNumber;
+                } 
+                
+                $randomNumbers = implode("", $tab);
     
                 $valueInDatabase = DB::table('codes')
-                                    ->select('code')
-                                    ->get();
+                                ->select('code')
+                                ->get();
     
                 foreach($valueInDatabase as $values)
                 {
-                    if($values == $randomNumber)
+                    if($values == $randomNumbers)
                     {
                         return "Wygenerowany kod istnieje już w bazie danych";
                     }
                 }
-    
-                DB::insert("insert into codes (id, code, date) values ( , $randomNumber, )");
-                
-                redirect()->back();
+
+                $idFromDatabase = DB::table('codes')->max('id');
+                $idFromDatabase++;
+
+                $date = date("Y-m-d");
+
+
+                DB::table('codes')->insert([
+                    'id' => $idFromDatabase,
+                    'code' => $randomNumbers,
+                    'date' => $date
+                ]);
             }
+            return view('/codes');
         }
         else
         {
             return view('/create');
         }
-       
     }
+
 
     /**
      * Display the specified resource.
@@ -70,8 +84,34 @@ class CodeController extends Controller
      * @param  \App\Models\Code  $code
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Code $code)
+    public function destroy(Request $request)
     {
-        return view('/codes');
+        if($request -> has('codesToDelete'))
+        {
+            $codes = new Code();
+
+            $codes -> codesToDelete = $request -> codesToDelete;
+
+            $code = explode(",", $codes->codesToDelete);
+
+            $numberOfCodesInTab = count($code);
+
+            for($i = 0; $i < $numberOfCodesInTab; $i++)
+            {
+                DB::table('codes')
+                    ->where('code', $code[$i])
+                    ->delete();
+            }
+            return view('/delete');
+        }
+        else
+        {
+            return view('/delete');
+        }
+           
+        function spacingMethod()
+        {
+            // funkcja sprawdzająca czym są oddzielone wartości z textarea
+        }
     }
 }

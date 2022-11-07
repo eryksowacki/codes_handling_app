@@ -48,7 +48,20 @@
     </header>
 
     <main>
-        <textarea name="Text1" cols="40" rows="5"></textarea>
+        <form action="{{ url('/codes/delete') }}" method="post">
+            @csrf
+            Podaj numery kodów do usunięcia: <br>
+            <textarea name="codesToDelete" cols="40" rows="5"></textarea>
+            <input type="submit" value="Usuń">
+        </form>
+        @foreach($codes as $code)
+            <li>{{ $code -> id}}</li>
+            <li>{{ $code -> code}}</li>
+            <li>{{ $code -> date}}</li>
+        @endforeach
+        @if(empty($code))
+            Brak kodów w bazie danych.
+        @endif
     </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
