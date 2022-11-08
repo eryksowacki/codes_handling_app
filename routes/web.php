@@ -22,7 +22,7 @@ Route::post('/codes/create', 'App\Http\Controllers\CodeController@create');
 Route::get('/codes', 'App\Http\Controllers\CodeController@show');
 Route::get('/codes/delete', 'App\Http\Controllers\CodeController@destroy');
 Route::post('/codes/delete', 'App\Http\Controllers\CodeController@destroy');
-?>
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
